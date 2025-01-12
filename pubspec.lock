@@ -320,6 +320,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.1"
+
   petitparser:
     dependency: transitive
     description:
@@ -461,6 +462,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.3"
+  tflite:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: main
+      resolved-ref: "346a3d7132f39b1a8cfcaa8fd5f1ae853b79175f"
+      url: "https://github.com/sumn2u/flutter_tflite.git"
+    source: git
+    version: "2.0.0"
   typed_data:
     dependency: transitive
     description:
@@ -501,6 +511,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.10.0"
+
   xdg_directories:
     dependency: transitive
     description:
