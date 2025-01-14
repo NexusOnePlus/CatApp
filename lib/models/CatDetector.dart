@@ -1,9 +1,8 @@
 import 'dart:io';
-import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tflite/tflite.dart';
 
-class CatDetector{
+class CatDetector {
   Future<void> loadModel() async {
     await Tflite.loadModel(
       model: 'assets/model_unquant.tflite',
@@ -11,23 +10,20 @@ class CatDetector{
     );
   }
 
-  Future<List?> detectImage(String assetPath) async {
-    final ByteData imageData = await rootBundle.load(assetPath);
-    final Uint8List imageBytes = imageData.buffer.asUint8List();
-
-    final directory = await getTemporaryDirectory();
-    final tempFile = File('${directory.path}/image.jpg');
-    await tempFile.writeAsBytes(imageBytes);
-
-    var predictions = await Tflite.runModelOnImage(
-      path: tempFile.path,
-      numResults: 2,
-      threshold: 0.6,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
-
-    return predictions;
+  Future<List?> detectImage(File imageFile) async {
+    try {
+      var predictions = await Tflite.runModelOnImage(
+        path: imageFile.path,
+        numResults: 4,
+        threshold: 0.6,
+        imageMean: 127.5,
+        imageStd: 127.5,
+      );
+      return predictions;
+    } catch (e) {
+      debugPrint('Error al procesar imagen: $e');
+      return null;
+    }
   }
 
   void dispose() {
