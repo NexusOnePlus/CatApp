@@ -13,7 +13,7 @@ class NavigationBarPages extends StatefulWidget {
 class _NavigationBarPagesState extends State<NavigationBarPages> {
   int thecurrentIndex = 0;
   List pages = [
-    Home(),
+    HomePage(),
     Favorites(),
     Settings()
   ];
